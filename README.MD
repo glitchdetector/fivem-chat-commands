@@ -17,6 +17,8 @@ It provides server owners with a simple way of installing and configuring their 
 * Download the repository
 * Put the chat_commands folder in your resources directory
 * Add `start chat_commands` to your server config
+* Configure `settings.lua` to your liking
+    * If you are using ESX or vRP, set the `use_esx` or `use_vrp` field to true!
 
 ## Command Pack Installation
 * Download the command pack, they usually come as `.lua` files

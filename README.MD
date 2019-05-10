@@ -14,17 +14,17 @@ It provides server owners with a simple way of installing and configuring their 
 * Potentially powerful API, yet also simple to use.
 
 ## Resource Installation
-* Download the chat_commands resource
+* Download the repository
 * Put the chat_commands folder in your resources directory
 * Add `start chat_commands` to your server config
 
 ## Command Pack Installation
-* Download a command pack, they usually come as `.lua` files
+* Download the command pack, they usually come as `.lua` files
 * Drag and drop the pack file into the `chat_commands/commands` folder
 * You should now see that the pack is loaded when the server is started
 
 ## Note
-#### Warning! This resource depends on a feature only available since FXServer version 1226!
+#### Warning! This resource depends on a feature only available since FXServer version `1226`!
 This resource in itself does not contain commands, commands are available in the FiveM Forums release topic.
 
 There should be enough comments etc. to get started on creating your own commands, even if you're not an experienced programmer.

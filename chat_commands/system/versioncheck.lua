@@ -9,7 +9,10 @@ if SETTINGS.check_updates then
                 log("Update check failed, where did the remote repository go?")
             elseif curVersion ~= responseText and tonumber(curVersion) < tonumber(responseText) then
                 log("###############################")
-                log(""..resourceName.." is outdated, should be:\n"..responseText.."is:\n"..curVersion.."\nplease update it from https://github.com"..updatePath.."")
+                log(""..resourceName.." is outdated.")
+                log("Available version: " .. responseText)
+                log("Current Version: " .. curVersion)
+                log("Please update it from https://github.com"..updatePath.."")
                 log("###############################")
             elseif tonumber(curVersion) > tonumber(responseText) then
                 log("You somehow skipped a few versions of "..resourceName.." or the git went offline, if it's still online i advise you to update ( or downgrade? )")

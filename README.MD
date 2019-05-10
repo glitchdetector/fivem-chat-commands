@@ -96,9 +96,10 @@ The following keywords are available:
 | Keyword | Description |
 |---|---|
 | `#name#` | Replaced with the players name, if IDs are enabled, then the ID is appended aswell. If framework names are enabled, this is the framework specific name. |
+| `#char#` | Same as `#name#`, but ignores the ID setting. |
 | `#id#` | Replaced with the players server ID. Normally the players source ID, but if vRP is enabled then this is the players vRP ID. |
 | `#time#` | Replaced with the current timestamp of the server. |
-| `#username#` | Replaced with the players username, used in cases where the framework name should not be shown. |
+| `#username#` | Same as `#name#`, but does not use framework name. In cases where only the username should be shown. |
 
 ## Example command pack
 This example pack will add some simple roleplay chat commands, these are just examples. Do not use these for your server.

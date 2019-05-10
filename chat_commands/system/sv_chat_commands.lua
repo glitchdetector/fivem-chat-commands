@@ -122,6 +122,7 @@ local function commandHandler(command, source, args, raw)
         end
         local message = command.format
         message = message:gsub("#username#", SETTINGS.show_id and ("%s (%s)"):format(visualUsername, visualId) or visualUsername)
+        message = message:gsub("#char#", visualName)
         message = message:gsub("#name#", SETTINGS.show_id and ("%s (%s)"):format(visualName, visualId) or visualName)
         message = message:gsub("#id#", visualId)
         message = message:gsub("#message#", table.concat(args, " "))
@@ -131,6 +132,7 @@ local function commandHandler(command, source, args, raw)
             if command.title then
                 local title = command.title
                 title = title:gsub("#username#", SETTINGS.show_id and ("%s (%s)"):format(visualUsername, visualId) or visualUsername)
+                title = title:gsub("#char#", visualName)
                 title = title:gsub("#name#", SETTINGS.show_id and ("%s (%s)"):format(visualName, visualId) or visualName)
                 title = title:gsub("#id#", visualId)
                 title = title:gsub("#message#", table.concat(args, " "))

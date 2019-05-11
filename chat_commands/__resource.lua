@@ -22,6 +22,7 @@ server_script 'settings.lua'
 server_script 'system/sv_pre.lua'
 server_script "commands/*.lua"
 
+server_script 'system/sv_fxcheck_*.lua'
 server_script 'system/sv_chat_commands.lua'
 
 server_script 'system/versioncheck.lua'

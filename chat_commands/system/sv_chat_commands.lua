@@ -188,3 +188,12 @@ for _, command in next, COMMANDS do
         TriggerClientEvent("chat:addSuggestion", -1, "/" .. command.command, command.help, command.args)
     end
 end
+
+if not SETTINGS.fxcheck then
+    log("/==================================\\")
+    log("|              WARNING!            |")
+    log("|===================================")
+    log("| Unsupported FXServer version!    |")
+    log("| Required: FXServer 1226 or newer |")
+    log("\\==================================/")
+end

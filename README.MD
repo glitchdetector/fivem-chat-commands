@@ -34,7 +34,7 @@ It provides server owners with a simple way of installing and configuring their 
 
 ## Note
 #### Warning! This resource depends on a feature only available since FXServer version `1226`!
-This resource in itself does not contain commands, commands are available in the FiveM Forums release topic.
+There are a few example command packs in this repository download, more may be available on the FiveM Forums.
 
 There should be enough comments etc. to get started on creating your own commands, even if you're not an experienced programmer.
 

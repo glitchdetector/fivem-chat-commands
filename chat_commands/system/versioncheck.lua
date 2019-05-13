@@ -42,10 +42,13 @@ RegisterCommand(GetCurrentResourceName(), function(_, args)
                     if err ~= 200 then
                         log("Failed to download file " .. fileName .. ": " .. err)
                     else
-                        log("Downloading file " .. fileName)
-                        SaveResourceFile(GetCurrentResourceName(), fileName, responseText, -1)
-                        if not LoadResourceFile(GetCurrentResourceName(), fileName) then
-                            log("Failed to save file " .. fileName.. ". Does the directory exist?")
+                        if LoadResourceFile(GetCurrentResourceName(), fileName) ~= responseText then
+                            log("Downloading file " .. fileName)
+                            SaveResourceFile(GetCurrentResourceName(), fileName, responseText, -1)
+
+                            if not LoadResourceFile(GetCurrentResourceName(), fileName) then
+                                log("Failed to save file " .. fileName.. ". Does the directory exist?")
+                            end
                         end
                     end
                     _l = true

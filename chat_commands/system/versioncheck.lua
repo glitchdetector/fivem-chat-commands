@@ -65,8 +65,8 @@ RegisterCommand(GetCurrentResourceName(), function(_, args)
                     files = files + 1
                 end
             end
-            log("###############################")
             if files > 0 then
+                log("###############################")
                 log("Updated " .. files .. " files")
             else
                 log("No changes were made")

@@ -1,8 +1,11 @@
+-- Enables rendering of text above someones head, to show certain actions being performed
+
 local FloatingText = {}
 local FloatingTextDuration = 5000
 local FloatingTextSize = 1.0
 local FloatingTextColor = {255, 255, 255, 255}
 local FloatingTextFont = 4
+local FloatingTextMaxDistance = 50.0
 
 RegisterNetEvent("chat_commands:showFloatingText")
 AddEventHandler("chat_commands:showFloatingText", function(target, text)
@@ -35,15 +38,24 @@ local function DrawText3D(text, x, y, z)
 end
 
 Citizen.CreateThread(function()
+    print("[Chat Commands] Overhead Text enabled")
     while true do
         Wait(0)
+        local lpos = GetEntityCoords(PlayerPedId())
         for n, text in next, FloatingText do
             if NetworkIsPlayerActive(text.target) then
                 local ply = GetPlayerPed(text.target)
                 local pos = GetWorldPositionOfEntityBone(ply, GetEntityBoneIndexByName(ply, "head"))
-                DrawText3D(text.text, pos.x, pos.y, pos.z + 0.2)
+                if #(lpos - pos) <= FloatingTextMaxDistance then
+                    DrawText3D(text.text, pos.x, pos.y, pos.z + 0.2)
+                end
+            else
+                -- Offline player
             end
-            if text.life < GetGameTimer() then table.remove(FloatingText, n) end
+            if text.life < GetGameTimer() then
+                -- Remove old floating text
+                table.remove(FloatingText, n)
+            end
         end
     end
 end)

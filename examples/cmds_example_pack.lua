@@ -28,12 +28,12 @@
 CommandPack("Example Pack", "glitchdetector", {
     -- Simple OOC command, using the only two required parameters
     {
-        command = "ooc",
+        command = "ex_ooc",
         format = "^9[[[ OOC #name# #message# ]]]",
     },
     -- A /me command with range and help information
     {
-        command = "me",
+        command = "ex_me",
         format = "^6* #name# #message#",
         help = "Personal action",
         usage = "/me [action]",
@@ -42,7 +42,7 @@ CommandPack("Example Pack", "glitchdetector", {
     },
     -- Admin only announcement command (can only be used by ACE administrators), the administrator name is not shown
     {
-        command = "adminge",
+        command = "ex_adminge",
         format = "#message#",
         title = "ADMINISTRATOR ANNOUNCEMENT",
         color = {255, 0, 0},

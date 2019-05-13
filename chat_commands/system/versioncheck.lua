@@ -37,6 +37,7 @@ RegisterCommand(GetCurrentResourceName(), function(_, args)
         local updatePath = "/glitchdetector/fivem-chat-commands" -- your git user/repo path
         PerformHttpRequest("https://raw.githubusercontent.com"..updatePath.."/master/autoupdate", function(err, responseText, headers)
             local function updateFile(fileName)
+                local ok = false
                 local _l = false
                 PerformHttpRequest("https://raw.githubusercontent.com"..updatePath.."/master/chat_commands/" .. fileName, function(err, responseText, headers)
                     if err ~= 200 then
@@ -48,15 +49,27 @@ RegisterCommand(GetCurrentResourceName(), function(_, args)
 
                             if not LoadResourceFile(GetCurrentResourceName(), fileName) then
                                 log("Failed to save file " .. fileName.. ". Does the directory exist?")
+                            else
+                                ok = true
                             end
                         end
                     end
                     _l = true
                 end)
                 while not _l do Wait(0) end
+                return ok
             end
+            local files = 0
             for fileName in string.gmatch(responseText, "%S+") do
-                updateFile(fileName)
+                if updateFile(fileName) then
+                    files = files + 1
+                end
+            end
+            log("###############################")
+            if files > 0 then
+                log("Updated " .. files .. " files")
+            else
+                log("No changes were made")
             end
             log("###############################")
             if SETTINGS.use_esx then

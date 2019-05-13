@@ -38,7 +38,7 @@ Citizen.CreateThread(function()
     while true do
         Wait(0)
         for n, text in next, FloatingText do
-            if NetworkIsPlayerActive(text.target)
+            if NetworkIsPlayerActive(text.target) then
                 local ply = GetPlayerPed(text.target)
                 local pos = GetEntityCoords(ply)
                 DrawText3D(text.text, pos.x, pos.y, pos.z + 2.0)

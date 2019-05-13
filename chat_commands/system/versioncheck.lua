@@ -15,6 +15,8 @@ if SETTINGS.check_updates then
                 log("Please update it from https://github.com"..updatePath.."")
                 log("###############################")
                 log("Or do /" .. GetCurrentResourceName() .. " autoupdate")
+                log("(This will not overwrite your settings.lua file)")
+                log("(This will not remove your command packs)")
                 log("###############################")
 
             elseif tonumber(curVersion) > tonumber(responseText) then
@@ -38,10 +40,13 @@ RegisterCommand(GetCurrentResourceName(), function(_, args)
                 local _l = false
                 PerformHttpRequest("https://raw.githubusercontent.com"..updatePath.."/master/chat_commands/" .. fileName, function(err, responseText, headers)
                     if err ~= 200 then
-                        log("Failed to update file " .. fileName .. ": " .. err)
+                        log("Failed to download file " .. fileName .. ": " .. err)
                     else
                         log("Downloading file " .. fileName)
                         SaveResourceFile(GetCurrentResourceName(), fileName, responseText, -1)
+                        if not LoadResourceFile(GetCurrentResourceName(), fileName) then
+                            log("Failed to save file " .. fileName.. ". Does the directory exist?")
+                        end
                     end
                     _l = true
                 end)
@@ -51,7 +56,12 @@ RegisterCommand(GetCurrentResourceName(), function(_, args)
                 updateFile(fileName)
             end
             log("###############################")
-            log("Please restart the resource")
+            if SETTINGS.use_esx then
+                -- ESX command def is so wonky it will duplicate commands if we reload lol
+                log("Please restart the server")
+            else
+                log("Please /refresh then /restart " .. GetCurrentResourceName())
+            end
             log("###############################")
         end, "GET")
     else

@@ -1,0 +1,2 @@
+-- This is where extension modules are placed --
+Simply drag and drop the module in here, client files are prefixed cl_ and server files sv_, shared files sh_

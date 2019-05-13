@@ -24,6 +24,7 @@ vRPclient = nil
 
 -- vRP compatibility
 if SETTINGS.use_vrp then
+    log("Enabling vRP compatibility")
     local Proxy = module("vrp", "lib/Proxy")
     local Tunnel = module("vrp", "lib/Tunnel")
     vRP = Proxy.getInterface("vRP")
@@ -33,7 +34,10 @@ end
 
 -- ESX compatibility
 if SETTINGS.use_esx then
-    TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+    log("Enabling ESX compatibility")
+    while not ESX do
+        TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+    end
     log("ESX compatibility enabled")
 end
 

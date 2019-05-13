@@ -25,6 +25,13 @@ It provides server owners with a simple way of installing and configuring their 
 * Drag and drop the pack file into the `chat_commands/commands` folder
 * You should now see that the pack is loaded when the server is started
 
+## Updating
+* By enabling `check_updates` in `settings.lua`, the resource will automatically check for updates
+* If an update is found, you will be given the option to update.
+* To update, use `chat_commands autoupdate` in the console.
+* Your resource files will be automatically updated to their newest version.
+* This will not overwrite your `settings.lua` file or your command packs.
+
 ## Note
 #### Warning! This resource depends on a feature only available since FXServer version `1226`!
 This resource in itself does not contain commands, commands are available in the FiveM Forums release topic.

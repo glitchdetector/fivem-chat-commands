@@ -1,3 +1,6 @@
+commands/info
+modules/info
+modules/cl_overhead_text.lua
 system/cl_proximity.lua
 system/sv_chat_commands.lua
 system/sv_fxcheck_1226.lua

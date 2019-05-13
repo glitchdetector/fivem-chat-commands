@@ -1,35 +1,3 @@
--- CHAT_COMMANDS = {
---     {
---         command = "me",
---         format = "^6* #name# #message#",
---         help = "Personal action",
---         range = 50.0,
---     },
---     {
---         command = "ooc",
---         format = "^9[[[ #name#: #message# ]]]",
---         help = "Global out of character chat",
---         range = -1,
---     },
---     {
---         command = "alert",
---         format = "^9[[[ #name#: #message# ]]]",
---         help = "Admin alert",
---         range = -1,
---         admin = true,
---     },
---     {
---         -- Example command that relays the message to something else, like discord (actual discord code not included)
---         command = "report",
---         format = "**#name# reports an issue:** #message#",
---         help = "Report an issue",
---         hidden = true,
---         cb = function(source, message)
---             TriggerEvent("SendMessageToDiscord", message)
---         end,
---     },
--- }
-
 local function commandHandler(command, source, args, raw)
     if not source or source == 0 then
         log("This command can not be executed by the console")
@@ -74,22 +42,7 @@ local function commandHandler(command, source, args, raw)
                 return false
             end
         elseif SETTINGS.use_esx then
-            -- Check if user is an ESX admin
-            if ESX then
-                local function isESXAdmin()
-                    local xPlayer = ESX.GetPlayerFromId(source)
-                    local group = xPlayer.getGroup()
-                    if group == "admin" then return true end
-                    return false
-                end
-                if not isESXAdmin() then
-                    deny()
-                    return false
-                end
-            else
-                reply("Server is configured to use ESX, but ESX is not initialized.")
-                return false
-            end
+            -- ESX admin is already handled by the command def
         else
             -- Nothing needs to be done, ACE should already handle this case
         end
@@ -117,7 +70,19 @@ local function commandHandler(command, source, args, raw)
                 end})
                 while not loaded do Wait(0) end
             elseif SETTINGS.use_esx then
-
+                local function getESXPlayername()
+                    local identifier = GetPlayerIdentifiers(source)[1]
+                    local result = MySQL.Sync.fetchAll("SELECT * FROM users WHERE identifier = @identifier", {['@identifier'] = identifier})
+                    if result[1] ~= nil then
+                        local identity = result[1]
+                        return true, identity['firstname'], identity['lastname']
+                    end
+                    return false, "", ""
+                end
+                local ok, firstName, lastName = getESXPlayername()
+                if ok then
+                    visualName = ("%s %s"):format(firstName, lastName)
+                end
             end
         end
         local message = command.format
@@ -181,9 +146,18 @@ for _, command in next, COMMANDS do
             aceLocked = true
         end
     end
-    RegisterCommand(command.command, function(source, args, raw)
-        commandHandler(command, source, args, raw)
-    end, aceLocked)
+    if SETTINGS.use_esx and command.admin then
+        -- Register command as an essentialmode admin command
+        TriggerEvent('es:addGroupCommand', command.command, 'admin', function(source, args, user)
+            commandHandler(command, source, args, raw)
+        end, function(source, args, user)
+            TriggerClientEvent('chat:addMessage', source, { args = { '^1SYSTEM', (command.noperm and command.noperm or 'Insufficient Permissions.') } })
+        end)
+    else
+        RegisterCommand(command.command, function(source, args, raw)
+            commandHandler(command, source, args, raw)
+        end, aceLocked)
+    end
     if command.help then
         TriggerClientEvent("chat:addSuggestion", -1, "/" .. command.command, command.help, command.args)
     end

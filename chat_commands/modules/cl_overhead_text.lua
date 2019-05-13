@@ -40,8 +40,8 @@ Citizen.CreateThread(function()
         for n, text in next, FloatingText do
             if NetworkIsPlayerActive(text.target) then
                 local ply = GetPlayerPed(text.target)
-                local pos = GetEntityCoords(ply)
-                DrawText3D(text.text, pos.x, pos.y, pos.z + 2.0)
+                local pos = GetWorldPositionOfEntityBone(ply, GetEntityBoneIndexByName(ply, "head"))
+                DrawText3D(text.text, pos.x, pos.y, pos.z + 0.2)
             end
             if text.life < GetGameTimer() then table.remove(FloatingText, n) end
         end

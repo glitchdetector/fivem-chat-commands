@@ -1,0 +1,7 @@
+system/cl_proximity.lua
+system/sv_chat_commands.lua
+system/sv_fxcheck_1226.lua
+system/sv_pre.lua
+system/versioncheck.lua
+__resource.lua
+version.lua

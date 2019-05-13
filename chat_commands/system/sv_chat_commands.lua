@@ -55,7 +55,7 @@ local function commandHandler(command, source, args, raw)
         end
         return true
     end
-    if #args > 0 then
+    if #args > 0 or command.noargs then
         local visualName = GetPlayerName(source)
         local visualUsername = GetPlayerName(source)
         local visualId = source

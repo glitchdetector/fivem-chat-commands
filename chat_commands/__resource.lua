@@ -16,13 +16,16 @@ usage [[
 -- vRP compatibility
 server_script '@vrp/lib/utils.lua'
 
+-- ESX compatibility
+server_script '@mysql-async/lib/MySQL.lua'
+
 client_script 'system/cl_proximity.lua'
 
 server_script 'settings.lua'
 server_script 'system/sv_pre.lua'
 server_script "commands/*.lua"
 
-server_script 'system/sv_fxcheck_*.lua'
+-- server_script 'system/sv_fxcheck_*.lua'
 server_script 'system/sv_chat_commands.lua'
 
 server_script 'system/versioncheck.lua'

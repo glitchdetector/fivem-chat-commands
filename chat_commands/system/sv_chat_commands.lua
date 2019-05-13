@@ -190,10 +190,11 @@ for _, command in next, COMMANDS do
 end
 
 if not SETTINGS.fxcheck then
-    log("/==================================\\")
-    log("|              WARNING!            |")
-    log("|===================================")
-    log("| Unsupported FXServer version!    |")
-    log("| Required: FXServer 1226 or newer |")
-    log("\\==================================/")
+    log("|=====================")
+    log("| WARNING!")
+    log("|=====================")
+    log("| Unsupported FXServer version!")
+    log("| Required: FXServer 1226 or newer")
+    log("| Current: " .. GetConvar("version", ""))
+    log("|=====================")
 end

@@ -28,4 +28,4 @@ CommandPack("Police Requirement Example", "glitchdetector", {
         return false
     end,
     noperm = "You are not a police officer!",
-}
+})

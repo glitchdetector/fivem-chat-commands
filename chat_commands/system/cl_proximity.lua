@@ -4,7 +4,7 @@ AddEventHandler("chat_commands:proximity", function(serverId, range, chatMessage
     local playerPed = GetPlayerPed(player)
     local ped = PlayerPedId()
     local dist = #(GetEntityCoords(playerPed) - GetEntityCoords(ped))
-    if dist <= range or player == PlayerId() then
+    if player ~= -1 and (dist <= range or player == PlayerId()) then
         TriggerEvent("chat:addMessage", chatMessage)
     end
 end)
